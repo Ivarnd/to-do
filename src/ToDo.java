@@ -24,8 +24,8 @@ public class ToDo {
     }
 
     public void markAsDone(String task){
-        System.out.println("Marking " + task + " as completed");
         if (tasks.containsKey(task)){
+            System.out.println("Marking " + task + " as completed");
             tasks.replace(task, true);
         }
         else {
