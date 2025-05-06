@@ -5,8 +5,9 @@ public class App {
         Scanner scan = new Scanner(System.in);
         ToDo todolist = new ToDo("Today tasks");
         String text = "";
+        boolean program = false;
 
-        while (!text.equals("q")){
+        while (!program){
             System.out.println("What do you wanna do? Print q to quit. Print add to add task, remove to remove task, mark to mark as complete, modify to modify the task.");
             text = scan.nextLine();
             if (text.equals("add")) {
@@ -31,21 +32,16 @@ public class App {
                 String newtask = scan.nextLine();
                 todolist.modifyTask(oldtask, newtask);
             }
+            else if (text.equals("q")) {
+                program = true;
+            }
             else {
                 System.out.println("Try again");
             }
         }
 
-        // todolist.addTask("Buy groceries");
-        // todolist.addTask("Complete homework");
-        // todolist.addTask("Play basketball");
-        // todolist.displayTasks();
-        // todolist.removeTask("Buy groceries");
-        // todolist.markAsDone("Complete homework");
-        // todolist.markAsDone("Him");
-        // todolist.modifyTask("Complete homework", "Complete math");
-
         todolist.displayTasks();
+        todolist.storeTasks();
 
         scan.close();
     }
