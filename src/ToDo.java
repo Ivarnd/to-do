@@ -1,6 +1,11 @@
 import java.util.HashMap;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -15,8 +20,8 @@ public class ToDo {
         file = "tasks.json";
     }
 
-    public void addTask(String task){
-        tasks.put(task, false);
+    public void addTask(String task, Boolean completion){
+        tasks.put(task, completion);
     }
 
     public void removeTask(String task){
@@ -52,8 +57,6 @@ public class ToDo {
 
     @SuppressWarnings("unchecked")
     public void storeTasks() throws IOException{
-        System.out.println("Storing all the tasks");
-
         JSONArray arr = new JSONArray();
         for (HashMap.Entry<String,Boolean> task : tasks.entrySet()){
             String description = task.getKey();
@@ -62,14 +65,32 @@ public class ToDo {
             obj.put("Task", description);
             obj.put("Completion", completion);
             arr.add(obj);
-
         }
 
         try (FileWriter writer = new FileWriter(file)) {
             writer.write(arr.toJSONString());
         }
+    }
 
-        System.out.println("Stored all the tasks");
+    public void restoreTasks() throws IOException, FileNotFoundException, ParseException{
+        System.out.println("Restoring tasks from JSON file");
+
+        JSONParser parser = new JSONParser();   
+        
+        try{
+            JSONArray arr = (JSONArray) parser.parse(new FileReader(file));
+            for (Object o : arr){
+                JSONObject obj = (JSONObject) o;
+
+                String task = (String) obj.get("Task");
+                Boolean completion = (Boolean) obj.get("Completion");
+                addTask(task, completion);
+            }
+        }
+        finally{
+
+        }
+        
     }
 
     public void displayTasks(){

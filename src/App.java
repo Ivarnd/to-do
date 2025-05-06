@@ -7,13 +7,15 @@ public class App {
         String text = "";
         boolean program = false;
 
+        todolist.restoreTasks();
+
         while (!program){
             System.out.println("What do you wanna do? Print q to quit. Print add to add task, remove to remove task, mark to mark as complete, modify to modify the task.");
             text = scan.nextLine();
             if (text.equals("add")) {
                 System.out.println("What task do you wanna add?");
                 String task = scan.nextLine();
-                todolist.addTask(task);
+                todolist.addTask(task, false);
             }
             else if (text.equals("remove")) {
                 System.out.println("What task do you wanna remove?");
