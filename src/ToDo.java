@@ -73,8 +73,6 @@ public class ToDo {
     }
 
     public void restoreTasks() throws IOException, FileNotFoundException, ParseException{
-        System.out.println("Restoring tasks from JSON file");
-
         JSONParser parser = new JSONParser();   
         
         try{

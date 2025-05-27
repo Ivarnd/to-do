@@ -10,7 +10,7 @@ public class App {
         todolist.restoreTasks();
 
         while (!program){
-            System.out.println("What do you wanna do? Print q to quit. Print add to add task, remove to remove task, mark to mark as complete, modify to modify the task.");
+            System.out.println("What do you wanna do? Print q to quit. Print add to add task, remove to remove task, mark to mark as complete, modify to modify the task, display to display the tasks.");
             text = scan.nextLine();
             if (text.equals("add")) {
                 System.out.println("What task do you wanna add?");
@@ -34,6 +34,9 @@ public class App {
                 String newtask = scan.nextLine();
                 todolist.modifyTask(oldtask, newtask);
             }
+            else if(text.equals("display")){
+                todolist.displayTasks();
+            }
             else if (text.equals("q")) {
                 program = true;
             }
@@ -41,8 +44,7 @@ public class App {
                 System.out.println("Try again");
             }
         }
-
-        todolist.displayTasks();
+        System.out.println("Closing the program");
         todolist.storeTasks();
 
         scan.close();
